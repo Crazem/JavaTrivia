@@ -52,7 +52,8 @@ public class CardLayoutFrame extends JFrame {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         currentQuestionIdx = 0;
-        importQuestions();
+
+
 
         // first page - welcome
         createWelcomePanel();
@@ -176,9 +177,9 @@ public class CardLayoutFrame extends JFrame {
         //add the play button the play button panel
         //playButtonPanel.add(playButton);
         JPanel quizSelect = new JPanel(new GridLayout(2, 2, 10, 10));
-        
-        
-        
+
+
+
         quizSelect.add(cs);
         quizSelect.add(ptable);
         quizSelect.add(math);
@@ -189,7 +190,7 @@ public class CardLayoutFrame extends JFrame {
         ptable.addActionListener(sel);
         math.addActionListener(sel);
         cap.addActionListener(sel);
-        
+
         usernamePanel.add(playButtonPanel, BorderLayout.SOUTH);
         usernamePanel.add(quizSelect, BorderLayout.CENTER);
 
@@ -200,24 +201,29 @@ public class CardLayoutFrame extends JFrame {
 
     private class gameSelect implements ActionListener {
         @Override
-
         public void actionPerformed(ActionEvent e) {
-            QuestionsLoader Loader = new QuestionsLoader();
-            if(e.getSource() == cs) {
-                List<Question> questions = Loader.readFile("cs.txt");
+            QuestionsLoader loader = new QuestionsLoader();
+            List<Question> loadedQuestions = null;
+            if (e.getSource() == cs) {
+                loadedQuestions = loader.readFile("cs.txt");
+            } else if (e.getSource() == math) {
+                loadedQuestions = loader.readFile("math.txt");
+            } else if (e.getSource() == ptable) {
+                loadedQuestions = loader.readFile("ptable.txt");
+            } else if (e.getSource() == cap) {
+                loadedQuestions = loader.readFile("statecap.txt");
+            }
+            if (loadedQuestions != null && loadedQuestions.size() > 0) {
+                importQuestions(loadedQuestions);
+                currentQuestionIdx = 0;
                 cardLayout.show(cardPanel, "G");
-            }else if(e.getSource() == math) {
-                List<Question> questions = Loader.readFile("math.txt");
-                cardLayout.show(cardPanel, "G");
-            }else if(e.getSource() == ptable) {
-                List<Question> questions = Loader.readFile("ptable.txt");
-                cardLayout.show(cardPanel, "G");
-            }else if(e.getSource() == cap) {
-                List<Question> questions = Loader.readFile("cap.txt");
-                cardLayout.show(cardPanel, "G");
+                loadNextQuestion();
+            } else {
+                JOptionPane.showMessageDialog(null, "No questions found for this category.");
             }
         }
     }
+
 
     private class ButtonHandler implements ActionListener {
         @Override
@@ -278,40 +284,22 @@ public class CardLayoutFrame extends JFrame {
         }
     }
 
-    private void importQuestions() {
-        questionGroups = new ArrayList<>();
-        correctAnswers = new ArrayList<>();
-
-//        List<String> list = new ArrayList<>();
-//        list.add("Question 1: What do we refer to BST in 4319 ?");
-//        list.add("British Summer Time");
-//        list.add("Breadth Search Tree");
-//        list.add("Binary Search Tree");
-//        list.add("None of above");
-//        questionGroups.add(list);
-        questionGroups.add(List.of("Question 1: What do we refer to BST in 4319 ?",
-                "British Summer Time",
-                "Breadth Search Tree",
-                "Binary Search Tree",
-                "None of above"));
-        correctAnswers.add(2);
-
-        questionGroups.add(List.of("Which class belongs to Java Swing?",
-                "NumberFormatException",
-                "String",
-                "Graphics",
-                "None of above"));
-        correctAnswers.add(3);
-
-        questionGroups.add(List.of("What is the capital of France?", "Paris", "London", "Berlin", "Rome"));
-        correctAnswers.add(0);
-
-        questionGroups.add(List.of("Which planet is known as the Red Planet?", "Earth", "Venus", "Mars", "Jupiter"));
-        correctAnswers.add(2);
-
-        questionGroups.add(List.of("Recursion always needs a?", "Loop", "Base Case", "Queue", "Stack"));
-        correctAnswers.add(1);
+    private void importQuestions(List<Question> loadedQuestions) {
+        questionGroups = new ArrayList<List<String>>();
+        correctAnswers = new ArrayList<Integer>();
+        for (int i = 0; i < loadedQuestions.size(); i = i + 1) {
+            Question q = loadedQuestions.get(i);
+            List<String> questionData = new ArrayList<String>();
+            questionData.add(q.question);
+            questionData.add(q.options[0]);
+            questionData.add(q.options[1]);
+            questionData.add(q.options[2]);
+            questionData.add(q.options[3]);
+            questionGroups.add(questionData);
+            correctAnswers.add(q.correctIndex);
+        }
     }
+
 
     private void loadNextQuestion() {
         if (questionGroups == null || questionGroups.size() == 0
@@ -327,4 +315,3 @@ public class CardLayoutFrame extends JFrame {
         }
     }
 }
-
