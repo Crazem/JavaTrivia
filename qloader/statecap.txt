@@ -1,0 +1,25 @@
+What is the capital of California?,Sacramento,Los Angeles,San Francisco,San Diego,0
+What is the capital of Texas?,Austin,Dallas,Houston,San Antonio,0
+What is the capital of Florida?,Tallahassee,Orlando,Miami,Jacksonville,0
+What is the capital of New York?,Albany,New York City,Buffalo,Syracuse,0
+What is the capital of Pennsylvania?,Harrisburg,Philadelphia,Pittsburgh,Lancaster,0
+What is the capital of Illinois?,Springfield,Chicago,Naperville,Aurora,0
+What is the capital of Ohio?,Cincinnati,Columbus,Toledo,Cleveland,1
+What is the capital of North Carolina?,Charlotte,Raleigh,Greensboro,Asheville,1
+What is the capital of Michigan?,Detroit,Lansing,Grand Rapids,Ann Arbor,1
+What is the capital of New Jersey?,Newark,Trenton,Jersey City,Atlantic City,1
+What is the capital of Virginia?,Virginia Beach,Richmond,Norfolk,Arlington,1
+What is the capital of Washington?,Tacoma,Olympia,Seattle,Spokane,1
+What is the capital of Arizona?,Tucson,Mesa,Phoenix,Flagstaff,2
+What is the capital of Massachusetts?,Springfield,Cambridge,Boston,Worcester,2
+What is the capital of Tennessee?,Memphis,Knoxville,Nashville,Chattanooga,2
+What is the capital of Indiana?,Fort Wayne,Evansville,Indianapolis,South Bend,2
+What is the capital of Missouri?,Kansas City,St. Louis,Jefferson City,Springfield,2
+What is the capital of Maryland?,Baltimore,Philadelphia,Annapolis,Frederick,2
+What is the capital of Colorado?,Aurora,Colorado Springs,Boulder,Denver,3
+What is the capital of Minnesota?,Minneapolis,Rochester,Duluth,St. Paul,3
+What is the capital of South Carolina?,Raleigh,Charleston,Myrtle Beach,Columbia,3
+What is the capital of Alabama?,Birmingham,Baton Rouge,Huntsville,Montgomery,3
+What is the capital of Louisiana?,New Orleans,Lafayette,Charlotte,Baton Rouge,3
+What is the capital of Oregon?,Portland,Seattle,Bend,Salem,3
+What is the capital of Kentucky?,Nashville,Louisville,Lexington,Frankfort,3

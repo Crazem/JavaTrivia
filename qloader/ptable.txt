@@ -1,0 +1,25 @@
+What is the chemical symbol of Aluminum?,Al,Au,Am,An,0
+Which of these is a nonmetal?,Chlorine,Sodium,Zinc,Mercury,0
+What is the chemical symbol of Helium?,He,Hl,H,Hm,0
+What is the chemical symbol for Lead?,Pb,Le,Ld,Pd,0
+What element has the symbol H?,Hydrogen,Helium,Mercury,Potassium,0
+Which of these is a metal?,Potassium,Sulfur,Chlorine,Phosphorus,0
+What is the chemical symbol of Gold?,Go,Au,Gl,Ag,1
+What element has the symbol Mg?,Manganese,Magnesium,Mercury,Molybdenum,1
+What is the chemical symbol of Platinum?,P,Pt,Pl,Pa,1
+Which element has the symbol Ag?,Argon,Silver,Gold,Astatine,1
+What is the chemical symbol for Titanium?,Ta,Ti,T,Tm,1
+What is the chemical symbol for Iron?,Hg,Fe,Ir,Io,1
+What is the chemical symbol of Nickel?,N,Ni,K,Nc,1
+What is the chemical symbol of Silicon?,Sc,Sl,Si,S,2
+What is the chemical symbol of Nitrogen?,Ni,No,N,Ng,2
+Which of these elements is a noble gas?,Hydrogen,Carbon,Helium,Nitrogen,2
+What element has the symbol S?,Selenium,Silicon,Sulfur,Iron,2
+What is the chemical symbol of Fluorine?,Fo,Fl,F,Fr,2
+Which of these elements is not a noble gas?,Argon,Nitrogen,Krypton,Helium,1
+Which element has the symbol Sn?,Silicon,Strontium,Iron,Tin,3
+Which of these is a metal?,Silicon,Chlorine,Arsenic,Calcium,3
+What is the chemical symbol of Lithium?,Lt,Lm,L,Li,3
+What element has the symbol C?,Calcium,Copper,Cobalt,Carbon,3
+Which of these elements is not a noble gas?,Xenon,Radon,Neon,Oxygen,3
+What element has the symbol I?,Lithium,Iridium,Potassium,Iodine,3

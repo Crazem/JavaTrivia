@@ -1,0 +1,25 @@
+What is DFS?,Dorian Finney-Smith,Depth First Search,Daily Fantasy Sports,All of the above,3
+Which type of linked list allows traversal in both directions?,Doubly Linked List,Singly Linked List,Circular Linked List,Skip List,0
+What method allows you to efficiently find the middle of a linked list?,Two Pointer,Dynamic Programming,Merge Sort,Binary Search,0
+Which of these implements first in first out?,Queue,Linked List,Trees,Stack,0
+Which traversal visits nodes level by level in a tree?,BFS,DFS,Inorder,Postorder,0
+Which traversal of a binary tree visits nodes left-root-right?,Inorder,Preorder,Postorder,DFS,0
+Which data structure stores elements in a key-value pair format?,Hash Map,Queue,Stack,Heap,0
+Which algorithm is divide-and-conquer?,Bubble Sort,Merge Sort,Linear Search,None of the above,1
+Which data structure allows insertion and deletion at both ends?,Queue,Deque,Stack,HashMap,1
+Which of these is NOT a linear data structure?,Array,Binary Tree,Linked List,Stack,1
+Which of these implements last in first out?,Queue,Stack,Linked List,Hash Map,1
+Which sorting algorithm repeatedly swaps adjacent elements if they are in the wrong order?,Selection Sort,Bubble Sort,Insertion Sort,Merge Sort,1
+Which operation on a stack removes the top element?,enqueue,pop,push,peek,1
+What is the time complexity of traversing all elements in a singly linked list of n nodes?,O(1),O(log n),O(n),O(n^2),2
+What is the time complexity of accessing an element in an array by index?,O(n),O(log n),O(1),O(n log n),2
+What is the time complexity of binary search in a sorted array?,O(n),O(1),O(log n),O(n log n),2
+What is the worst-case time complexity of bubble sort?,O(n),O(log n),O(n^2),O(n log n),2
+What is the time complexity of merging two sorted arrays of sizes n and m?,O(n),O(m),O(n+m),O(n*m),2
+What is the time complexity of checking if an element exists in a hash table?,O(n),O(log n),O(1),O(n^2),2
+Which keyword is used to inherit a class in Java?,implements,super,this,extends,3
+Which of these is NOT a primitive data type in Java?,char,int,boolean,String,3
+Which of these converts a String to an integer in Java?,String.valueOf(),Integer.toString(),Double.parseDouble(),Integer.parseInt(),3
+Which keyword is used to create an instance of a class?,create,instance,object,new,3
+Which of these exceptions is thrown when dividing by zero?,IOException,ArrayIndexOutOfBoundsException,ClassNotFoundException,ArithmeticException,3
+Which operator is used for logical AND in Java?,&,||,|,&&,3
