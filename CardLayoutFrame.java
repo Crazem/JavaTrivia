@@ -9,9 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.module.FindException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Timer;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
@@ -44,6 +43,14 @@ public class CardLayoutFrame extends JFrame {
     private Color RED =  new Color(160,27,27);
     private Color GREEN = new Color(46, 160, 96);
 
+    private boolean clicked = false;
+
+    private JLabel nameLabel;
+    private JLabel timerLabel;
+    private javax.swing.Timer countdownTimer; // Swing timer (NOT java.util.Timer)
+    private int timeLeft; // seconds remaining
+    private Timer tmr = new Timer();
+
 
     private int Correct;
 
@@ -52,8 +59,6 @@ public class CardLayoutFrame extends JFrame {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         currentQuestionIdx = 0;
-
-
 
         // first page - welcome
         createWelcomePanel();
@@ -82,7 +87,7 @@ public class CardLayoutFrame extends JFrame {
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
         JLabel titleLabel = new JLabel("Results:");
         JLabel userLabel = new JLabel("Username: " + username);
-        JLabel scoreLabel = new JLabel("Score: " + Correct + " / 5");
+        JLabel scoreLabel = new JLabel("Score: " + Correct + " / 25");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
         userLabel.setFont(new Font("Arial", Font.PLAIN, 24));
         scoreLabel.setFont(new Font("Arial", Font.PLAIN, 32));
@@ -114,9 +119,9 @@ public class CardLayoutFrame extends JFrame {
 
     private void createGamePanel() {
         JPanel gamePanel = new JPanel(new BorderLayout());
+
         questionLabel = new JLabel("Place holder for questions", SwingConstants.CENTER);
         questionLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        gamePanel.add(questionLabel, BorderLayout.NORTH);
 
         nextButton = new JButton("Go to results");
         gamePanel.add(nextButton, BorderLayout.SOUTH);
@@ -128,6 +133,31 @@ public class CardLayoutFrame extends JFrame {
         }
 
         gamePanel.add(nestedButtonPanel, BorderLayout.CENTER);
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+
+        nameLabel = new JLabel();
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        nameLabel.setText("Player: " + username);
+        cardLayout.show(cardPanel, "G");
+
+        timerLabel = new JLabel("Time: 10s");
+        timerLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        timerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        topPanel.add(nameLabel, BorderLayout.WEST);
+        topPanel.add(timerLabel, BorderLayout.EAST);
+        topPanel.add(questionLabel, BorderLayout.NORTH);
+
+        gamePanel.add(topPanel, BorderLayout.NORTH);
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                JOptionPane.showMessageDialog(null, "Times up!");
+            }
+        };
 
         /* remember to add this username panel to the cardPanel object, and give it a name */
         cardPanel.add(gamePanel, "G");
@@ -214,8 +244,10 @@ public class CardLayoutFrame extends JFrame {
                 loadedQuestions = loader.readFile("statecap.txt");
             }
             if (loadedQuestions != null && loadedQuestions.size() > 0) {
+                Collections.shuffle(loadedQuestions);
                 importQuestions(loadedQuestions);
                 currentQuestionIdx = 0;
+                nameLabel.setText("Player: " + username);
                 cardLayout.show(cardPanel, "G");
                 loadNextQuestion();
             } else {
@@ -246,6 +278,9 @@ public class CardLayoutFrame extends JFrame {
 
             } else if (e.getSource() == nextButton) {
                 createResultsPanel();
+                if (countdownTimer != null && countdownTimer.isRunning()) {
+                    countdownTimer.stop();
+                }
                 cardLayout.show(cardPanel, "R"); // show results
             }
         }
@@ -259,6 +294,16 @@ public class CardLayoutFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // check answer
+            if(clicked)
+                return;
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    clicked = false;
+                    loadNextQuestion();
+                }
+            };
             for(int i = 0;i < optionButtons.length;i++)
             {
                 if(i != correctAnswers.get(currentQuestionIdx))
@@ -271,16 +316,15 @@ public class CardLayoutFrame extends JFrame {
                 }
             }
             if (index == correctAnswers.get(currentQuestionIdx)) {
-                JOptionPane.showMessageDialog(null, "Correct!");
                 Correct++;
-
-            } else {
-                JOptionPane.showMessageDialog(null, "that was incorrect.");
             }
-
             // go to the next question
+            if (countdownTimer != null && countdownTimer.isRunning()) {
+                countdownTimer.stop();
+            }
             currentQuestionIdx++;
-            loadNextQuestion();
+            clicked = true;
+            timer.schedule(task, 2500);
         }
     }
 
@@ -300,12 +344,13 @@ public class CardLayoutFrame extends JFrame {
         }
     }
 
-
     private void loadNextQuestion() {
-        if (questionGroups == null || questionGroups.size() == 0
-                || currentQuestionIdx >= questionGroups.size()) {
+        if (countdownTimer != null && countdownTimer.isRunning()) {
+            countdownTimer.stop();
+        }
+        if (questionGroups == null || questionGroups.isEmpty() || currentQuestionIdx >= questionGroups.size()) {
             createResultsPanel();
-            cardLayout.show(cardPanel, "R"); // show results
+            cardLayout.show(cardPanel, "R");
             return;
         }
         questionLabel.setText(questionGroups.get(currentQuestionIdx).get(0));
@@ -313,5 +358,25 @@ public class CardLayoutFrame extends JFrame {
             optionButtons[i].setText(questionGroups.get(currentQuestionIdx).get(i + 1));
             optionButtons[i].setBackground(Color.white);
         }
+
+        timeLeft = 10;
+        timerLabel.setText("Time: " + timeLeft + "s");
+
+        countdownTimer = new javax.swing.Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timeLeft--;
+                timerLabel.setText("Time: " + timeLeft + "s");
+                if (timeLeft <= 0) {
+                    ((javax.swing.Timer) e.getSource()).stop();
+                    JOptionPane.showMessageDialog(null, "Time's up!");
+                    currentQuestionIdx++;
+                    loadNextQuestion();
+                }
+            }
+        });
+        countdownTimer.start();
     }
-}
+
+};
+
