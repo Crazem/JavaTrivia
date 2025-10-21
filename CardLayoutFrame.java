@@ -317,14 +317,17 @@ public class CardLayoutFrame extends JFrame {
             }
             if (index == correctAnswers.get(currentQuestionIdx)) {
                 Correct++;
+                JOptionPane.showMessageDialog(null, "Correct!");
             }
+            else
+                JOptionPane.showMessageDialog(null, "Incorrect!");
             // go to the next question
             if (countdownTimer != null && countdownTimer.isRunning()) {
                 countdownTimer.stop();
             }
             currentQuestionIdx++;
             clicked = true;
-            timer.schedule(task, 2500);
+            timer.schedule(task, 1000);
         }
     }
 
